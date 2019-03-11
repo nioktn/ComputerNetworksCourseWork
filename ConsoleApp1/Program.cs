@@ -53,32 +53,6 @@ namespace ConsoleApp1
                 return $"{ string.Empty.PadRight(res, '0')}{binaryOctet}";
             }
 
-            internal static void ComposeNets(Net net1, Net net2)
-            {
-                var subnetBinaryOctet3Part1 = FixBinaryView(Convert.ToString(composeSubnetCounter, 2), 5);
-                if (net1.subNetOctet3Part2[0] != '0') throw new Exception("RUKiddin'Me?");
-                //var subnetBinaryOctet3Part1 = net1.subnetBinaryOctet3Part1;
-                var binFullHostNewNet = FixBinaryView(Convert.ToString(net2.numOfHosts, 2), 11);
-                binFullHostNewNet = $"{1}{binFullHostNewNet.Substring(1)}";
-                var subNetOctet3Part2 = binFullHostNewNet.Substring(0, 3);
-                var hostOctet4 = binFullHostNewNet.Substring(3);
-                var hostOctet4Decimal = Convert.ToInt32(hostOctet4, 2);
-                var subNetOctet3DecimalFull = Convert.ToInt32((subnetBinaryOctet3Part1 + subNetOctet3Part2), 2);
-                var clearDefaultSubnetByOctetDecimalNet1 = Convert.ToInt32((subnetBinaryOctet3Part1 + "000"), 2);
-                var clearDefaultSubnetByOctetDecimalNet2 = Convert.ToInt32((subnetBinaryOctet3Part1 + "100"), 2);
-
-                Console.WriteLine($"\n{string.Empty.PadRight(35, '+')} Compose Nets Start {string.Empty.PadRight(35, '+')}");
-                Console.WriteLine(
-$@"Number of subnets: {net1.numOfHosts}
-                    Lower border net1:      {beginning}.{clearDefaultSubnetByOctetDecimalNet1}.1  | {beginning}.{FixBinaryView(subnetBinaryOctet3Part1, 5)}_000.{FixBinaryView("1", 8)}
-                    Top border net1:        {beginning}.{net1.subNetOctet3DecimalFull}.{net1.hostOctet4Decimal} | {beginning}.{FixBinaryView(subnetBinaryOctet3Part1, 5)}_{net1.subNetOctet3Part2}.{FixBinaryView(net1.hostOctet4, 8)}
-Number of subnets: {net2.numOfHosts}
-                    Lower border net2:      {beginning}.{clearDefaultSubnetByOctetDecimalNet2}.1  | {beginning}.{FixBinaryView(subnetBinaryOctet3Part1, 5)}_100.{FixBinaryView("1", 8)}
-                    Top border net2:        {beginning}.{subNetOctet3DecimalFull}.{hostOctet4Decimal} | {beginning}.{FixBinaryView(subnetBinaryOctet3Part1, 5)}_{subNetOctet3Part2}.{FixBinaryView(hostOctet4, 8)}");
-                Console.WriteLine($"\n{string.Empty.PadRight(35, '+')} Compose Nets End {string.Empty.PadRight(35, '+')}\n");
-                composeSubnetCounter++;
-            }
-
             internal static void ComposeNets(params Net[] nets) // from 3 to 4 nets
             {
                 //var subnetOctet3Part1 = nets[0].subnetBinaryOctet3Part1;
@@ -119,3 +93,30 @@ $@"Number of subnets: {nets[subSubnetCounter].numOfHosts}
         }
     }
 }
+
+//            internal static void ComposeNets(Net net1, Net net2, string a)
+//            {
+//                var subnetBinaryOctet3Part1 = FixBinaryView(Convert.ToString(composeSubnetCounter, 2), 5);
+//                if (net1.subNetOctet3Part2[0] != '0') throw new Exception("RUKiddin'Me?");
+//                //var subnetBinaryOctet3Part1 = net1.subnetBinaryOctet3Part1;
+//                var binFullHostNewNet = FixBinaryView(Convert.ToString(net2.numOfHosts, 2), 11);
+//                binFullHostNewNet = $"{1}{binFullHostNewNet.Substring(1)}";
+//                var subNetOctet3Part2 = binFullHostNewNet.Substring(0, 3);
+//                var hostOctet4 = binFullHostNewNet.Substring(3);
+//                var hostOctet4Decimal = Convert.ToInt32(hostOctet4, 2);
+//                var subNetOctet3DecimalFull = Convert.ToInt32((subnetBinaryOctet3Part1 + subNetOctet3Part2), 2);
+//                var clearDefaultSubnetByOctetDecimalNet1 = Convert.ToInt32((subnetBinaryOctet3Part1 + "000"), 2);
+//                var clearDefaultSubnetByOctetDecimalNet2 = Convert.ToInt32((subnetBinaryOctet3Part1 + "100"), 2);
+
+//                Console.WriteLine($"\n{string.Empty.PadRight(35, '+')} Compose Nets Start {string.Empty.PadRight(35, '+')}");
+//                Console.WriteLine(
+//$@"Number of subnets: {net1.numOfHosts}
+//                    Lower border net1:      {beginning}.{clearDefaultSubnetByOctetDecimalNet1}.1  | {beginning}.{FixBinaryView(subnetBinaryOctet3Part1, 5)}_000.{FixBinaryView("1", 8)}
+//                    Top border net1:        {beginning}.{subNetOctet3DecimalFull}.{net1.hostOctet4Decimal} | {beginning}.{FixBinaryView(subnetBinaryOctet3Part1, 5)}_{net1.subNetOctet3Part2}.{FixBinaryView(net1.hostOctet4, 8)}
+//Number of subnets: {net2.numOfHosts}
+//                    Lower border net2:      {beginning}.{clearDefaultSubnetByOctetDecimalNet2}.1  | {beginning}.{FixBinaryView(subnetBinaryOctet3Part1, 5)}_100.{FixBinaryView("1", 8)}
+//                    Top border net2:        {beginning}.{subNetOctet3DecimalFull}.{hostOctet4Decimal} | {beginning}.{FixBinaryView(subnetBinaryOctet3Part1, 5)}_{subNetOctet3Part2}.{FixBinaryView(hostOctet4, 8)}");
+//                Console.WriteLine($"\n{string.Empty.PadRight(35, '+')} Compose Nets End {string.Empty.PadRight(35, '+')}\n");
+//                composeSubnetCounter++;
+//            }
+
