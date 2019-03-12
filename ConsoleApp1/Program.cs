@@ -57,15 +57,22 @@ namespace ConsoleApp1
             {
                 //var subnetOctet3Part1 = nets[0].subnetBinaryOctet3Part1;
                 var subnetOctet3Part1 = FixBinaryView(Convert.ToString(composeSubnetCounter, 2), 5);
-                if (nets[0].subNetOctet3Part2[0] != '0' | nets[0].subNetOctet3Part2[0] != '0') throw new Exception("RUKiddin'Me?");
+                //if (nets[0].subNetOctet3Part2[0] != '0' | nets[0].subNetOctet3Part2[0] != '0') throw new Exception("RUKiddin'Me?");
                 var subSubnetBinaryString = string.Empty;
 
                 Console.WriteLine($"\n{string.Empty.PadRight(35, '+')} Compose Nets Start {string.Empty.PadRight(35, '+')}");
                 for (int subSubnetCounter = 0; subSubnetCounter < nets.Length; subSubnetCounter++)
                 {
-                    subSubnetBinaryString = FixBinaryView(Convert.ToString(subSubnetCounter, 2), 2);
-                    var binFullHostNewNet = FixBinaryView(Convert.ToString(nets[subSubnetCounter].numOfHosts, 2), 11);
-                    binFullHostNewNet = $"{subSubnetBinaryString}{binFullHostNewNet.Substring(2)}";
+                    if (nets.Length != 2) subSubnetBinaryString = FixBinaryView(Convert.ToString(subSubnetCounter, 2), 2);
+                    else subSubnetBinaryString = Convert.ToString(subSubnetCounter, 2);
+
+                     var binFullHostNewNet = FixBinaryView(Convert.ToString(nets[subSubnetCounter].numOfHosts, 2), 11);
+                    if (nets.Length != 2) binFullHostNewNet = $"{subSubnetBinaryString}{binFullHostNewNet.Substring(2)}";
+                    else
+                    {
+                        binFullHostNewNet = $"{subSubnetBinaryString}{binFullHostNewNet.Substring(1)}";
+                        subSubnetBinaryString = subSubnetBinaryString + "0";
+                    }
                     string subNetOctet3Part2 = binFullHostNewNet.Substring(0, 3);
                     int fullOctet3Decimal = Convert.ToInt32($"{subnetOctet3Part1}{subNetOctet3Part2}", 2);
                     string hostOctet4 = binFullHostNewNet.Substring(3);
